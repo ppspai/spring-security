@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+
+    <select id="usersMaxNo" resultType="int">
+        select 
+            coalesce(max(no), 0)
+        from
+            users;
+    </select>
+    
+    <insert id="join" parameterType="users">
+        insert into users
+            (no,
+            id,
+            password,
+            name,
+            email)
+        values
+            (#{no},
+            #{id},
+            #{password},
+            #{name},
+            #{email})
+    </insert>
+    
+    <select id="findById" parameterType="loginVO" resultType="users">
+        select
+            *
+        from
+            users
+        where
+            id = #{id}
+    </select>
+</mapper>
